@@ -20,17 +20,3 @@ spec:
         - name: hello-node-rest
           containerPort: 5000 #Endpoint is at port 5000 in the container
           protocol: TCP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: hello-node-rest
-spec:
-  type: NodePort #Exposes the service as a node port
-  ports:
-  - port: 5000
-    targetPort: 5000
-    nodePort: 30001
-    protocol: TCP
-  selector:
-    app: hello-node-rest
