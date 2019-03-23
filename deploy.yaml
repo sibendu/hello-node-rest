@@ -1,0 +1,36 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: hello-node-rest
+spec:
+  selector:
+    matchLabels:
+      app: hello-node-rest
+  replicas: 1 # deployment runs 1 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: hello-node-rest
+    spec:
+      containers:
+      - name: hello-node-rest
+        image: sibendudas/hello-node-rest
+        imagePullPolicy: Always
+        ports:
+        - name: hello-node-rest
+          containerPort: 5000 #Endpoint is at port 5000 in the container
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-node-rest
+spec:
+  type: NodePort #Exposes the service as a node port
+  ports:
+  - port: 5000
+    targetPort: 5000
+    nodePort: 30000
+    protocol: TCP
+  selector:
+    app: hello-node-rest
