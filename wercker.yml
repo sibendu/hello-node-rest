@@ -23,7 +23,23 @@ deploy:
     - script:
         name: "Visualise Kubernetes config"
         code: cat deploy.yaml
+     
+     - kubectl:
+        name: delete existing deployment
+        server: $KUBERNETES_MASTER
+        #username: $KUBERNETES_USERNAME
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: delete deployment  hello-node-rest --ignore-not-found=true
         
+    - kubectl:
+        name: delete existing deployment
+        server: $KUBERNETES_MASTER
+        #username: $KUBERNETES_USERNAME
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: delete service  hello-node-rest --ignore-not-found=true
+     
     - kubectl:
         name: deploy to kubernetes
         server: $KUBERNETES_MASTER
