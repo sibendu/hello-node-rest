@@ -30,7 +30,7 @@ spec:
   ports:
   - port: 5000
     targetPort: 5000
-    nodePort: 30000
+    nodePort: 30001
     protocol: TCP
   selector:
     app: hello-node-rest
