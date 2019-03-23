@@ -1,3 +1,5 @@
 # hello-node-rest
 
-Simple node.js project exposing REST APIs
+Node.js project exposing REST APIs - /users
+Wercker CI/CD to deploy to Kubernetes (build using Dockerfile)
+
