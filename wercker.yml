@@ -24,7 +24,7 @@ deploy:
         name: "Visualise Kubernetes config"
         code: cat deploy.yaml
      
-     - kubectl:
+    - kubectl:
         name: delete existing deployment
         server: $KUBERNETES_MASTER
         #username: $KUBERNETES_USERNAME
