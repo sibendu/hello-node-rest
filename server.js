@@ -29,8 +29,7 @@ app.post('/users', function (req, res) {
    });
 })
 
-var server = app.listen(5000, function () {
-   var host = server.address().address
-   var port = server.address().port
-   console.log("Example app listening at http://%s:%s", host, port)
-})
+const PORT = 5000;
+const HOST = '0.0.0.0';
+app.listen(PORT, HOST);
+console.log('Running on http://${HOST}:${PORT}');
