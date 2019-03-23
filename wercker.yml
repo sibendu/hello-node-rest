@@ -1,0 +1,33 @@
+box:
+ id: node:8.15.1-jessie
+ ports:
+   - "5000"
+
+# Build definition
+build:
+  # The steps that will be executed on build
+  steps: 
+    - internal/docker-build:  
+        dockerfile: Dockerfile
+        image-name: sibendudas/hello-node-rest
+    - internal/docker-push:
+        image-name: sibendudas/hello-node-rest
+        username: $DOCKER_USERNAME
+        password: $DOCKER_PASSWORD
+        tag:  $DOCKER_TAG
+        repository: $DOCKER_REPO
+        registry: $DOCKER_REGISTRY    
+
+deploy:
+  steps:
+    - script:
+        name: "Visualise Kubernetes config"
+        code: cat deploy.yaml
+        
+    - kubectl:
+        name: deploy to kubernetes
+        server: $KUBERNETES_MASTER
+        #username: $KUBERNETES_USERNAME
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: apply -f deploy.yaml
