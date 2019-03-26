@@ -26,7 +26,7 @@ kind: Service
 metadata:
   name: hello-node-rest
 spec:
-  type: NodePort #Exposes the service as a node port
+  type: LoadBalancer #Exposes the service as a node port
   ports:
   - port: 5000
     targetPort: 5000
